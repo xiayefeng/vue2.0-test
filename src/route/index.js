@@ -1,3 +1,11 @@
+/*
+ * @Author: xiayefeng xiayu_12@yeah.net
+ * @Date: 2023-02-11 16:51:03
+ * @LastEditors: xiayefeng xiayu_12@yeah.net
+ * @LastEditTime: 2023-04-04 23:44:07
+ * @FilePath: \vue2.0-test\src\route\index.js
+ * @Description: 
+ */
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/home/index.vue'
@@ -25,6 +33,11 @@ const router = new Router({
       path: '/table3',
       name: 'table3',
       component: () => import('@/views/table/TableData3.vue')
+    },
+    {
+      path: '/select',
+      name: 'select',
+      component: () => import('@/views/select/MySelect.vue')
     }
   ]
 })
