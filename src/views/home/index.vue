@@ -2,25 +2,37 @@
  * @Author: xiayefeng xiayu_12@yeah.net
  * @Date: 2023-02-11 16:56:51
  * @LastEditors: xiayefeng xiayu_12@yeah.net
- * @LastEditTime: 2023-03-18 14:09:26
+ * @LastEditTime: 2023-04-15 22:49:10
  * @FilePath: \vue2.0-test\src\views\home\index.vue
  * @Description: 
 -->
 <template>
   <div>
     <input type="text" v-paste="handleParse">
+    <el-drug-select v-model="selectValue" @change="changeSelect">
+      <el-option value="1" key="1" label="AAA"></el-option>
+      <el-option value="2" key="2" label="BBB"></el-option>
+      <el-option value="3" key="3" label="CCC"></el-option>
+      <el-option value="4" key="4" label="DDD"></el-option>
+      <el-option value="5" key="5" label="EEE"></el-option>
+      <el-option value="6" key="6" label="FFF"></el-option>
+    </el-drug-select>
   </div>
 </template>
 
 <script>
 import { reqPost } from '@/api/common'
 // import * as qiniu from 'qiniu-js'
+import ElDrugSelect from '@/components/MySelect.vue'
 export default {
   name: 'HomePage',
-  components: {},
+  components: {
+    ElDrugSelect
+  },
   data () {
     return {
-      token: ''
+      token: '',
+      selectValue: []
     }
   },
   directives: {
@@ -90,10 +102,11 @@ export default {
         console.log(res)
         let pic = res.data.url;
         console.log(pic)
-
       })
     },
-
+    changeSelect(val){
+      console.log(val)
+    }
   }
 }
 </script>

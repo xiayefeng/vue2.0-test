@@ -13,6 +13,7 @@
     "element-ui": "^2.15.13",
     "lodash": "^4.17.21",
     "qiniu-js": "^3.4.1",
+    "sortablejs": "^1.15.0",
     "vue": "^2.7.14",
     "vue-router": "^3.6.5",
     "vxe-table": "^3.6.9",
