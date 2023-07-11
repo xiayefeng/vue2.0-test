@@ -38,6 +38,11 @@ const router = new Router({
       path: '/select',
       name: 'select',
       component: () => import('@/views/select/MySelect.vue')
+    },
+    {
+      path: '/tree',
+      name: 'tree',
+      component: () => import('@/views/tree/index.vue')
     }
   ]
 })
