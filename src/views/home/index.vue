@@ -2,8 +2,8 @@
  * @Author: xiayefeng xiayu_12@yeah.net
  * @Date: 2023-02-11 16:56:51
  * @LastEditors: xiayefeng xiayu_12@yeah.net
- * @LastEditTime: 2023-04-15 22:49:10
- * @FilePath: \vue2.0-test\src\views\home\index.vue
+ * @LastEditTime: 2023-07-30 00:30:24
+ * @FilePath: /vue2.0-test/src/views/home/index.vue
  * @Description: 
 -->
 <template>
@@ -17,6 +17,7 @@
       <el-option value="5" key="5" label="EEE"></el-option>
       <el-option value="6" key="6" label="FFF"></el-option>
     </el-drug-select>
+    <my-dialog />
   </div>
 </template>
 
@@ -24,10 +25,12 @@
 import { reqPost } from '@/api/common'
 // import * as qiniu from 'qiniu-js'
 import ElDrugSelect from '@/components/MySelect.vue'
+import MyDialog from './my_dialog.vue'
 export default {
   name: 'HomePage',
   components: {
-    ElDrugSelect
+    ElDrugSelect,
+    MyDialog
   },
   data () {
     return {

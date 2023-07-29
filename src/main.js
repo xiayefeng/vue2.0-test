@@ -15,10 +15,12 @@ import './reg_component'
 import ElementUI from 'element-ui'
 import './vxeTable.js'
 import 'element-ui/lib/theme-chalk/index.css';
+import driectives from '@/driectives'
 
 Vue.use(ElementUI)
 Vue.use(router)
 Vue.use(VXETable)
+Vue.use(driectives)
 Vue.config.productionTip = false
 
 new Vue({
