@@ -2,7 +2,6 @@ export const dialogDrag = {
   bind (el) {
     // 获取拖拽内容头部
     const dialogHeaderEl = el.querySelector('.el-dialog__header');
-    // 获取拖拽内容整体 这个rrc-dialog是我自己封装的组件 如果使用element的组件应写成.el-dialog
     const dragDom = el.querySelector('.el-dialog');
     dialogHeaderEl.style.cssText += ';cursor:move;'
     dragDom.style.cssText += ';top:0px;'
@@ -10,7 +9,6 @@ export const dialogDrag = {
     const sty = (function () {
       return (dom, attr) => getComputedStyle(dom, false)[attr]
     })()
-    // 获取原有属性 ie dom元素.currentStyle 火狐谷歌 window.getComputedStyle(dom元素, null);
 
 
     // 鼠标按下事件
@@ -63,20 +61,13 @@ export const dialogDrag = {
 
           // 移动当前元素
           dragDom.style.cssText += `;left:${left + styL}px;top:${top + styT}px;`
-          // 边界值判定 注意clientWidth scrollWidth区别 要减去之前的top left值
-          // dragDom.offsetParent表示弹窗阴影部分
-          // 移动当前元素
-          dragDom.style.cssText += `;left:${left + styL}px;top:${top + styT}px;`
-
-          //将此时的位置传出去
-          //binding.value({x:e.pageX,y:e.pageY})
         };
 
         document.onmouseup = function (e) {
           e.preventDefault()
-          document.onmousemove = null;
-          document.onmouseup = null;
-        };
+          document.onmousemove = null
+          document.onmouseup = null
+        }
       }
     }
   }
