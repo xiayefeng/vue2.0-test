@@ -43,6 +43,11 @@ const router = new Router({
       path: '/tree',
       name: 'tree',
       component: () => import('@/views/tree/index.vue')
+    },
+    {
+      path: '/flex',
+      name: 'flex',
+      component: () => import('@/views/flex/index.vue')
     }
   ]
 })
