@@ -55,3 +55,37 @@ var fn = async () => {
   }
 }
 fn()
+
+function parseMergeCell (data, field, colArr) {
+  let mergeCells = []
+  let repeatVal = ''
+  let rowspan = 1
+  for (let i = 0; i < data.length; i++) {
+    let { [field]: fieldVal } = data[i];
+    if (repeatVal === fieldVal) {
+      rowspan++
+      if ((i === data.length - 1) && rowspan > 1) {
+        const row = i - rowspan;
+        for (let j = 0; j < colArr.length; j++) {
+          mergeCells.push({ row, col: colArr[j], rowspan, colspan: 1 })
+        }
+      }
+      continue
+    } else {
+      if (rowspan > 1) {
+        const row = i - rowspan;
+        for (let j = 0; j < colArr.length; j++) {
+          mergeCells.push({ row, col: colArr[j], rowspan, colspan: 1 })
+        }
+      }
+      repeatVal = fieldVal;
+      rowspan = 1;
+    }
+
+  }
+  return mergeCells
+}
+
+const arr = parseMergeCell([{ id: 1, a: 1, b: 2, c: 3 }, { id: 1, a: 1, b: 2, c: 3 }, { id: 2, a: 2, b: 2, c: 4 }, { id: 2, a: 3, b: 3, c: 3 }, { id: 2, a: 3, b: 3, c: 4 }, { id: 3, a: 3, b: 3, c: 4 }, { id: 3, a: 3, b: 3, c: 4 }], 'id', [0])
+
+console.log(arr)
