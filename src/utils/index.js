@@ -13,8 +13,8 @@ export function parseMergeCell (data, field, colArr) {
     let { [field]: fieldVal } = data[i]
     if (repeatVal === fieldVal) {
       rowspan++
-      if ((i === data.length - 1) && rowspan > 1) {
-        const row = i - rowspan
+      if (i === data.length - 1) {
+        const row = i - rowspan + 1
         for (let j = 0; j < colArr.length; j++) {
           mergeCells.push({ row, col: colArr[j], rowspan, colspan: 1 })
         }
