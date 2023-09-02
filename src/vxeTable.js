@@ -31,7 +31,7 @@ VXETable.renderer.add('FilterContent', {
   // 筛选方法
   filterMethod ({ option, row, column }) {
     const { data } = option
-    console.log(data)
+    // console.log(data)
     const cellValue = row[column.field]
     if (cellValue) {
       if(data.data.number && data.data)
