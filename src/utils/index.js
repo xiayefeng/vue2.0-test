@@ -3,12 +3,17 @@
  * @param data {array} 接口返回的数组对象
  * @param field {array|string} 指定合并选项为数组对象的某个属性值
  * @param colArr {number[]} 需要合并列的下标
+ * @param signalSpan {{field: string, idx: number }[]} 需要合并的field已经列idx
  * @returns mergeCells {{row: number, col: number, colspan: number, colspan: number}[] }单元格合并规则
  */
-export function parseMergeCell (data, field, colArr) {
-  let mergeCells = []
+export function parseMergeCell (data, field, colArr, signalSpan = []) {
+  const mergeCells = []
   let repeatVal = ''
   let rowspan = 1
+  const signalSpanList = []
+  signalSpan.map(() => {
+    signalSpanList.push({span: 1, value: ''})
+  })
   for (let i = 0; i < data.length; i++) {
     // let { [field]: fieldVal } = data[i]
     let fieldVal = getCellsName(data[i], field)
@@ -20,7 +25,25 @@ export function parseMergeCell (data, field, colArr) {
           mergeCells.push({ row, col: colArr[j], rowspan, colspan: 1 })
         }
       }
-      continue
+      for (const [idx, item] of signalSpan.entries()) {
+        let signalVal = getCellsName(data[i], item.field)
+        if (signalVal === signalSpanList[idx].value) {
+          signalSpanList[idx].span++
+          if (i === data.length - 1) {
+            const span = signalSpanList[idx].span
+            const row = i - span + 1
+            mergeCells.push({ row, col: item.idx, rowspan: span, colspan: 1 })
+          }
+        } else {
+          const span = signalSpanList[idx].span
+          if (span > 1) {
+            const row = i - span
+            mergeCells.push({ row, col: item.idx, rowspan: span, colspan: 1 })
+          }
+          signalSpanList[idx].value = signalVal
+          signalSpanList[idx].span = 1
+        }
+      }
     } else {
       if (rowspan > 1) {
         const row = i - rowspan
