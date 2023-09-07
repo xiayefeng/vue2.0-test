@@ -12,7 +12,7 @@ export function parseMergeCell (data, field, colArr, signalSpan = []) {
   let rowspan = 1
   const signalSpanList = []
   signalSpan.map(() => {
-    signalSpanList.push({span: 1, value: ''})
+    signalSpanList.push({ span: 1, value: '' })
   })
   for (let i = 0; i < data.length; i++) {
     // let { [field]: fieldVal } = data[i]
@@ -50,6 +50,16 @@ export function parseMergeCell (data, field, colArr, signalSpan = []) {
         for (let j = 0; j < colArr.length; j++) {
           mergeCells.push({ row, col: colArr[j], rowspan, colspan: 1 })
         }
+      }
+      for (const [idx, item] of signalSpan.entries()) {
+        let signalVal = getCellsName(data[i], item.field)
+        const span = signalSpanList[idx].span
+        if (span > 1) {
+          const row = i - span
+          mergeCells.push({ row, col: item.idx, rowspan: span, colspan: 1 })
+        }
+        signalSpanList[idx].value = signalVal
+        signalSpanList[idx].span = 1
       }
       repeatVal = fieldVal
       rowspan = 1
