@@ -2,7 +2,7 @@
  * @Author: xiayefeng xiayu_12@yeah.net
  * @Date: 2023-02-11 16:56:51
  * @LastEditors: xiayefeng xiayu_12@yeah.net
- * @LastEditTime: 2023-07-30 00:30:24
+ * @LastEditTime: 2023-09-09 10:47:50
  * @FilePath: /vue2.0-test/src/views/home/index.vue
  * @Description: 
 -->
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { reqPost } from '@/api/common'
+import { reqPost, reqGet } from '@/api/common'
 // import * as qiniu from 'qiniu-js'
 import ElDrugSelect from '@/components/MySelect.vue'
 import MyDialog from './my_dialog.vue'
@@ -47,14 +47,27 @@ export default {
       }
     }
   },
-  created () {
+  async created () {
     reqPost('/api/getUploadToken', { bucket: 'wxu' }).then(res => {
       console.log(res)
       this.token = res.data?.data ?? ''
     })
+    const data = await this.getData()
+    console.log(data)
+    console.log('asdfasfd')
   },
   mounted () { },
   methods: {
+    async getData () {
+      const { data } = await reqGet('/api').catch(err => {
+        console.log(err)
+        return false
+      })
+      if (!data) {
+        throw Error('asdfsafd')
+      }
+      return data
+    },
     //微信截图上传图片时触发
     handleParse (e) {
       // let file = null;
@@ -107,7 +120,7 @@ export default {
         console.log(pic)
       })
     },
-    changeSelect(val){
+    changeSelect (val) {
       console.log(val)
     }
   }
